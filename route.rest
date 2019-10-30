@@ -1,0 +1,37 @@
+GET http://localhost:3000/
+###
+GET http://localhost:3000/5db8c345135c461eec924c10
+
+###
+POST http://localhost:3000/
+Content-Type: application/json
+
+{
+    "name": "Phizer", 
+    "marketSize": "100Billion"
+}
+
+###
+DELETE http://localhost:3000/5db8c345135c461eec924c10
+
+###
+PATCH http://localhost:3000/5db8c35292b3ac28fc3e337d
+Content-Type: application/json
+
+{
+    "name":"google",
+    "marketSize":"A whole lot"
+}
+
+###
+POST http://localhost:3000/teams
+Content-Type: application/json
+
+{
+    "team": "Phizer", 
+    "teamSize": "100Billion",
+    "companyId": "5db8c35392b3ac28fc3e337e"
+}
+
+###
+GET http://localhost:3000/teams
