@@ -1,22 +1,15 @@
 const express = require("express");
 const router = express.Router();
-const Company = require("../models/Company");
-const Team = require("../models/Teams");
-const TeamDom = require("../models/teamDom");
 
 router.post("/", async (req, res) => {
-    console.log(req.body)
-    const companyId = req.body.companyId;
-    let team = req.body.team;
-    let teamSize = req.body.teamSize;
-    const teamAdded = new Team(new TeamDom(team, teamSize))
-    const id = await Company.findById(companyId);
-    id.team.push(teamAdded);
-    await id.save();
-    console.log(id);
+    const { companyId, team, teamSize } = req.body;
+    const teamCompany = await Company.findById(companyId);
 
-    const result = await teamAdded.save();
-    console.log(result);
+    const addedTeam = await new Team(new TeamDom(team, teamSize)).save();
+
+    teamCompany.teams.push(addedTeam);
+
+    await teamCompany.save();
 })
 
 router.get("/", async (req, res) => {
